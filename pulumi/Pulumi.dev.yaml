@@ -1,0 +1,3 @@
+config:
+  az-py-pulumi:myconfig: "42"
+  azure-native:location: southindia

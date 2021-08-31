@@ -1,0 +1,6 @@
+name: az-py-pulumi
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: Azure IAC using Pulumi's Python API
