@@ -1,14 +1,16 @@
+import pulumi
 import pulumi.automation as auto
 from pulumi_azure_native import resources
-import sys
+from pulumi import Output
+import sys, json
 
 
 def pulumi_program():
-    resource_group = resources.ResourceGroup("hemant-rg1")
+    resource_group = resources.ResourceGroup("hemant-rg2")
+    pulumi.export("stack_output", resource_group.name)
 
-
-PROJECT_NAME = "azure-python"
-STACK_NAME = "dev"
+PROJECT_NAME    = "azure-python"
+STACK_NAME      = "dev"
 
 stack = auto.create_or_select_stack(stack_name      = STACK_NAME    ,
                                     project_name    = PROJECT_NAME  ,
@@ -29,6 +31,9 @@ if destroy:
     stack.destroy(on_output=print)
     print("stack destroy complete")
     sys.exit()
+try:
+    up_res = stack.up(on_output=print)
+    print("Created the Resource Group : " ,list(up_res.outputs.values())[0])
 
-up_res = stack.up(on_output=print)
-
+except Exception as e:
+    print("Encounterd an exception : ", e)
