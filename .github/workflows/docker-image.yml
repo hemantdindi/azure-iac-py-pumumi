@@ -18,5 +18,5 @@ jobs:
       run: docker build . --file Dockerfile --tag helloworld:latest
     - name: Container image scan
       uses: azure/container-scan@v0
-       with:
+      with:
            image-name: helloworld:latest 
